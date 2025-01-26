@@ -1,0 +1,36 @@
+tap "homebrew/bundle"
+
+tap "nikitabobko/tap"
+cask "nikitabobko/tap/aerospace"
+
+cask "bettertouchtool"
+
+# https://github.com/FelixKratz/JankyBorders
+tap "felixkratz/formulae"
+brew "borders"
+
+brew "carapace"
+brew "elixir"
+brew "exercism"
+brew "git-delta"
+brew "go"
+brew "lua-language-server"
+brew "neovim"
+brew "nushell"
+brew "pipenv"
+brew "podman"
+brew "socat"
+brew "starship"
+brew "stow"
+brew "zoxide"
+
+cask "ghostty"
+cask "podman-desktop"
+cask "visual-studio-code"
+
+vscode "jakebecker.elixir-ls"
+vscode "ms-azuretools.vscode-docker"
+vscode "ms-vscode-remote.remote-containers"
+vscode "pantajoe.vscode-elixir-credo"
+vscode "rooveterinaryinc.roo-cline"
+vscode "vscodevim.vim"

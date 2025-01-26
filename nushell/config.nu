@@ -208,7 +208,7 @@ $env.config = {
     }
 
     filesize: {
-        metric: false # true => KB, MB, GB (ISO standard), false => KiB, MiB, GiB (Windows standard)
+        metric: true # true => KB, MB, GB (ISO standard), false => KiB, MiB, GiB (Windows standard)
         format: "auto" # b, kb, kib, mb, mib, gb, gib, tb, tib, pb, pib, eb, eib, auto
     }
 
@@ -219,8 +219,7 @@ $env.config = {
     }
 
     color_config: $dark_theme # if you want a more interesting theme, you can replace the empty record with `$dark_theme`, `$light_theme` or another custom record
-    use_grid_icons: true
-    footer_mode: "25" # always, never, number_of_rows, auto
+    footer_mode: "auto" # always, never, number_of_rows, auto
     float_precision: 2 # the precision for displaying floats in tables
     buffer_editor: "" # command that will be used to edit the current line buffer with ctrl+o, if unset fallback to $env.EDITOR and $env.VISUAL
     use_ansi_coloring: true
@@ -897,34 +896,21 @@ def --env cx [arg] {
 }
 
 alias l = ls --all
-alias c = clear
+alias cl = clear
 alias ll = ls -l
 alias lt = eza --tree --level=2 --long --icons --git
 alias v = nvim
-alias hms = /nix/store/6kc5srg83nkyg21am089xx7pvq44kn2c-home-manager/bin/home-manager switch
 alias as = aerospace
 
 def ff [] {
     aerospace list-windows --all | fzf --bind 'enter:execute(bash -c "aerospace focus --window-id {1}")+abort'
 }
 
+$env.EDITOR = "nvim"
+
 
 # Git
-alias gc = git commit -m
-alias gca = git commit -a -m
-alias gp = git push origin HEAD
-alias gpu = git pull origin
-alias gst = git status
-alias glog = git log --graph --topo-order --pretty='%w(100,0,6)%C(yellow)%h%C(bold)%C(black)%d %C(cyan)%ar %C(green)%an%n%C(bold)%C(white)%s %N' --abbrev-commit
-alias gdiff = git diff
-alias gco = git checkout
-alias gb = git branch
-alias gba = git branch -a
-alias gadd = git add
-alias ga = git add -p
-alias gcoall = git checkout -- .
-alias gr = git remote
-alias gre = git reset
+alias g = git
 
 # K8s
 alias k = kubectl
@@ -940,8 +926,19 @@ alias kns = kubens
 alias kl = kubectl logs -f
 alias ke = kubectl exec -it
 
+# pasteboard
+alias c = pbcopy
+alias p = pbpaste
+
+# brew bundle install cleanup
+def bbic [] {
+    brew update;
+    brew bundle install --cleanup --file=~/Brewfile --no-lock;
+    brew upgrade;
+}
+
 source ~/.config/nushell/env.nu
 source ~/.zoxide.nu
 source ~/.cache/carapace/init.nu
-source ~/.local/share/atuin/init.nu
+#source ~/.local/share/atuin/init.nu
 use ~/.cache/starship/init.nu
